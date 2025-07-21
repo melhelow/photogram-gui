@@ -53,5 +53,22 @@ class PhotosController < ApplicationController
   redirect_to("/photos/#{a_new_photo.id}")
 end
 
+def update
+  the_id = params.fetch("modify_id")
+  the_photo = Photo.where(id: the_id).at(0)
+
+ 
+  input_image = params["query_image"]
+  input_caption = params["query_caption"]
+
+  the_photo.image = input_image
+  the_photo.caption = input_caption
+  the_photo.save
+
+  next_url = "/photos/" + the_photo.id.to_s
+  redirect_to(next_url)
+end
+
+
 
 end
